@@ -1,8 +1,32 @@
 <script>
-let on = true;
+const text = "Mysty is a skid!";
+let index = 0;
+let deleting = false;
+
+function updateTitle() {
+    if (!deleting) {
+        document.title = text.slice(0, index++);
+        if (index > text.length) {
+            deleting = true;
+            setTimeout(updateTitle, 1000);
+            return;
+        }
+    } else {
+        document.title = text.slice(0, index--);
+        if (index < 0) {
+            deleting = false;
+            index = 0;
+        }
+    }
+
+    setTimeout(updateTitle, deleting ? 75 : 125);
+}
 
 setInterval(() => {
-    document.title = on ? "Mysty is a skid!" : "";
-    on = !on;
-}, 500);
+    document.title = document.title;
+}, 50);
+
+window.addEventListener("load", () => {
+    setTimeout(updateTitle, 500);
+});
 </script>
