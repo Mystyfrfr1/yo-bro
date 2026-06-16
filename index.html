@@ -1,7 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>shut the fuck up</title>
-<p>yeah he a skid</p>
+<h1 id="rainbowText"></h1>
+
+<style>
+body {
+    background: #050505;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+h1 span {
+    display: inline-block;
+
+    background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        violet,
+        red
+    );
+    background-size: 400% 100%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        wave 1s ease-in-out infinite,
+        rainbow 4s linear infinite;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+</style>
+
+<script>
+const text = "Yes he is!!!";
+const container = document.getElementById("rainbowText");
+
+text.split("").forEach((letter, i) => {
+    const span = document.createElement("span");
+    span.textContent = letter === " " ? "\u00A0" : letter;
+    span.style.animationDelay = `${i * 0.1}s`;
+    container.appendChild(span);
+});
+</script>
