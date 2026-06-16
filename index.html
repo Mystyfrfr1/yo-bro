@@ -66,6 +66,10 @@
 </head>
 <body>
 
+<audio id="bgm" loop>
+    <source src="mysty-a-skid.mp3" type="audio/mpeg">
+</audio>
+
 <h1>yo bro</h1>
 
 <script>
@@ -93,6 +97,24 @@ function animateTitle() {
 }
 
 animateTitle();
+
+// AUDIO (fixed + more reliable browser unlock)
+const audio = document.getElementById("bgm");
+audio.volume = 0.5;
+audio.loop = true;
+
+function startAudio() {
+    audio.play().catch(() => {});
+}
+
+// try autoplay first
+window.addEventListener("load", () => {
+    startAudio();
+});
+
+// fallback unlock (guaranteed user gesture)
+document.addEventListener("click", startAudio, { once: true });
+document.addEventListener("keydown", startAudio, { once: true });
 </script>
 
 </body>
